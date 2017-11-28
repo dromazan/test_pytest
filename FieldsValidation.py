@@ -1,7 +1,6 @@
 import pytest
 from selenium import webdriver
-from selenium.webdriver import FirefoxProfile
-from selenium.webdriver.common.by import By
+
 import time
 from PageObject.GoogleForm import GoogleForm
 from Resources.resources import __google_form_url
@@ -92,6 +91,8 @@ def test_name_field_empty(run_chrome):
     assert run_chrome.name_exception_field().text == u'Відповідь на це запитання обов’язкова'
 
 
-# @pytest.mark.parametrize('option', ['Мужской', 'Женский', 'Другой'])
-# def test_sex_field_options(run_chrome, option):
-#     return
+@pytest.mark.parametrize('option', ['Мужской', 'Женский', 'Другой'])
+def test_sex_field_options(run_chrome, option):
+    run_chrome.select_sex_option(option)
+    time.sleep(2)
+    return

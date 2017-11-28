@@ -50,8 +50,8 @@ class GoogleForm(BasePage):
         elem.send_keys(value)
 
     def sex_listbox(self):
-        self.driver.find_element(By.XPATH, '/html/body/div[1]/div[2]/form/div/div[2]/div[2]/div[4]/div[2]/div[1]')
+        return self.driver.find_element(By.XPATH, '//div[contains(@class, "quantumWizMenuPaperselectOptionList)]')
 
     def select_sex_option(self, option):
         self.sex_listbox().click()
-        self.driver.find_element(By.XPATH,'//div[@data-value="%s"]' % option).click()
+        self.driver.find_element(By.XPATH,'//div[contains(@class, "quantumWizMenuPaperselectOption") and (@data-value=%s)]' % option).click()
