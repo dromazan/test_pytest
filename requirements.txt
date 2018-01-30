@@ -1,2 +1,2 @@
-selenium
-pytest
+selenium=3.8.1
+pytest=3.3.2
