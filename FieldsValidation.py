@@ -2,6 +2,9 @@ import pytest
 from selenium import webdriver
 
 import time
+
+from selenium.webdriver.chrome.options import Options
+
 from PageObject.GoogleForm import GoogleForm
 from Resources.resources import __google_form_url
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,7 +16,8 @@ from selenium.webdriver.common.keys import Keys
 @pytest.fixture(scope = 'module')
 def run_chrome():
     print('setup fixture')
-    driver = webdriver.Chrome()
+    options = Options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
+    driver = webdriver.Chrome(chrome_options=options)
     #driver = webdriver.Firefox()
     google = GoogleForm(driver)
     google.driver.get(__google_form_url)
