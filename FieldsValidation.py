@@ -5,7 +5,8 @@ import time
 
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
+
 
 from PageObject.GoogleForm import GoogleForm
 from Resources.resources import __google_form_url
@@ -14,17 +15,16 @@ from Resources.resources import __google_form_url
 
 @pytest.fixture(scope = 'module')
 def run_chrome():
-    print('setup fixture')
-    #options = Options()
-    #options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
-    #driver = webdriver.Chrome(chrome_options=options)
+    options = Options()
+    options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
+    driver = webdriver.Chrome(chrome_options=options)
 
     #FIREFOX
-    cap = DesiredCapabilities().FIREFOX
-    cap["marionette"] = True
-    opt = Options()
-    opt.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
-    driver = webdriver.Firefox(capabilities=cap, executable_path="Z:\\geckodriver-v0.19.0-win64\\geckodriver.exe", firefox_options=opt)
+    # cap = DesiredCapabilities().FIREFOX
+    # cap["marionette"] = True
+    # opt = Options()
+    # opt.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
+    # driver = webdriver.Firefox(capabilities=cap, executable_path="Z:\\geckodriver-v0.19.0-win64\\geckodriver.exe", firefox_options=opt)
     google = GoogleForm(driver)
     google.driver.get(__google_form_url)
     yield google
