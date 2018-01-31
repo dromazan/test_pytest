@@ -90,7 +90,7 @@ def test_name_field_empty(run_chrome):
     run_chrome.fill_name_field(' ')
     assert run_chrome.name_exception_field().text == u'Відповідь на це запитання обов’язкова'
 
-
+@pytest.mark.skip(reason="sex deleted")
 @pytest.mark.parametrize('option', ['Мужской', 'Женский', 'Другой'])
 def test_sex_field_options(run_chrome, option):
     run_chrome.select_sex_option(option)
