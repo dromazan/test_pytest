@@ -3,6 +3,7 @@ from selenium import webdriver
 
 import time
 
+
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.firefox.options import Options
 
@@ -23,7 +24,7 @@ def run_chrome():
     cap["marionette"] = True
     opt = Options()
     opt.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
-    driver = webdriver.Firefox(capabilities=cap, firefox_options=opt)
+    driver = webdriver.Firefox(capabilities=cap, executable_path="Z:\\geckodriver-v0.19.0-win64\\geckodriver.exe", firefox_options=opt)
     google = GoogleForm(driver)
     google.driver.get(__google_form_url)
     yield google
