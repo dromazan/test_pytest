@@ -13,8 +13,8 @@ from selenium.webdriver.common.keys import Keys
 @pytest.fixture(scope = 'module')
 def run_chrome():
     print('setup fixture')
-    #driver = webdriver.Chrome()
-    driver = webdriver.Firefox()
+    driver = webdriver.Chrome()
+    #driver = webdriver.Firefox()
     google = GoogleForm(driver)
     google.driver.get(__google_form_url)
     yield google
