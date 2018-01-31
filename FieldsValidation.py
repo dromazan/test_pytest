@@ -18,8 +18,8 @@ def run_chrome():
     print('setup fixture')
     options = Options()
     options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
-    driver = webdriver.Chrome(chrome_options=options)
-    #driver = webdriver.Firefox()
+    #driver = webdriver.Chrome(chrome_options=options)
+    driver = webdriver.Firefox()
     google = GoogleForm(driver)
     google.driver.get(__google_form_url)
     yield google

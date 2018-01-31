@@ -19,6 +19,9 @@ class GoogleForm(BasePage):
     def email_exception_field(self):
         return self.driver.find_element(By.XPATH, '//div[@role="alert"][1]')
 
+    def date_field_chrome(self):
+        return self.driver.find_element(By.XPATH, '//input[@type="date"]')
+
     def day_field(self):
         return self.driver.find_element(By.XPATH, '//input[@aria-label = "День місяця"]')
 
