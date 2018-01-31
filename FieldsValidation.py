@@ -16,7 +16,8 @@ from selenium.webdriver.common.keys import Keys
 @pytest.fixture(scope = 'module')
 def run_chrome():
     print('setup fixture')
-    options = Options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
+    options = Options()
+    options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
     driver = webdriver.Chrome(chrome_options=options)
     #driver = webdriver.Firefox()
     google = GoogleForm(driver)
