@@ -7,18 +7,21 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from PageObject.GoogleForm import GoogleForm
 from Resources.resources import __google_form_url
-from conftest import _browser
 
 
 @pytest.fixture(scope='module')
-def run_browser():
+def run_browser(_browser):
+    print('setup fixture')
+    print(_browser)
     if _browser == 'Chrome':
+        print('using chrome driver')
         from selenium.webdriver.chrome.options import Options
         options = Options()
         options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
         driver = webdriver.Chrome(chrome_options=options)
 
     elif _browser == 'Firefox':
+        print('using firefox driver')
         from selenium.webdriver.firefox.options import Options
         cap = DesiredCapabilities().FIREFOX
         cap["marionette"] = True

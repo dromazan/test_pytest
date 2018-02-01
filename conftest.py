@@ -1,5 +1,4 @@
 import optparse
-import pytest
 
 parser = optparse.OptionParser()
 
@@ -9,4 +8,5 @@ def pytest_addoption(parser):
 
 
 def _browser(request):
+    print(request.config.getoption("--browser"))
     return request.config.getoption("--browser")
