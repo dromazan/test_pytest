@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 import sys
 import time
-
+import pytest_variables
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from PageObject.GoogleForm import GoogleForm
@@ -10,17 +10,17 @@ from Resources.resources import __google_form_url
 
 
 @pytest.fixture(scope='module')
-def run_browser(_browser):
-    print('setup fixture')
-    print(_browser)
-    if _browser == 'Chrome':
+def run_browser(variables):
+    browser = variables['capabilities']['browser']
+    print(browser)
+    if browser == 'Chrome':
         print('using chrome driver')
         from selenium.webdriver.chrome.options import Options
         options = Options()
         options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
         driver = webdriver.Chrome(chrome_options=options)
 
-    elif _browser == 'Firefox':
+    elif browser == 'Firefox':
         print('using firefox driver')
         from selenium.webdriver.firefox.options import Options
         cap = DesiredCapabilities().FIREFOX
@@ -29,7 +29,7 @@ def run_browser(_browser):
         opt.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
         driver = webdriver.Firefox(capabilities=cap, executable_path="Z:\\geckodriver-v0.19.0-win64\\geckodriver.exe", firefox_options=opt)
 
-    elif _browser == 'IE':
+    elif browser == 'IE':
         pass
 
     # Default browser is Chrome
