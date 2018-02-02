@@ -16,7 +16,7 @@ IE
  - Set Build Name: #${BUILD_NUMBER} - ${PROJECT_DISPLAY_NAME} - ${ENV,var="Browser"}
  - Build: Virtualenv builder
   Command:
-    !#/bin/bash
-    git clone https://github.com/dromazan/test_pytest.git .\\repo
-    pip install -r repo\requirements.txt
-    pytest -s  repo\FieldsValidation.py --variables repo\%Browser%.json
+        !#/bin/bash
+        git clone https://github.com/dromazan/test_pytest.git .\\repo
+        pip install -r repo\requirements.txt
+        pytest -s  repo\FieldsValidation.py --variables repo\%Browser%.json --html=c:\Jenkins\Reports\report-%date%-%Browser%-%RANDOM%.html
