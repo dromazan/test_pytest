@@ -16,21 +16,23 @@ def run_browser(variables):
     if browser == 'Chrome':
         print('using chrome driver')
         from selenium.webdriver.chrome.options import Options
-        options = Options()
-        options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
-        driver = webdriver.Chrome(chrome_options=options)
+        options_chrome = Options()
+        options_chrome.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
+        driver = webdriver.Chrome(chrome_options=options_chrome)
 
     elif browser == 'Firefox':
         print('using firefox driver')
         from selenium.webdriver.firefox.options import Options
         cap = DesiredCapabilities().FIREFOX
         cap["marionette"] = True
-        opt = Options()
-        opt.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
-        driver = webdriver.Firefox(capabilities=cap, executable_path="Z:\\geckodriver-v0.19.0-win64\\geckodriver.exe", firefox_options=opt)
+        options_ff = Options()
+        options_ff.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
+        driver = webdriver.Firefox(capabilities=cap, executable_path="Z:\\geckodriver-v0.19.0-win64\\geckodriver.exe", firefox_options=options_ff)
 
-    elif browser == 'IE':
-        pass
+    elif browser == 'Edge':
+        print('using edge driver')
+        from selenium.webdriver.edge.options import Options
+        driver = webdriver.Edge(executable_path="Z:\\edgedriver\\MicrosoftWebDriver.exe")
 
     # Default browser is Chrome
     else:
