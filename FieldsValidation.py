@@ -28,7 +28,7 @@ def run_browser(variables):
         cap["marionette"] = True
         options_ff = Options()
         options_ff.binary_location = r'C:\Users\droma\Downloads\firefox.exe'
-        driver = webdriver.Firefox(capabilities=cap, executable_path="Z:\\geckodriver-v0.19.0-win64\\geckodriver.exe", firefox_options=options_ff)
+        driver = webdriver.Firefox(capabilities=cap, firefox_options=options_ff)
 
     elif browser == 'Edge':
         print('using edge driver')
