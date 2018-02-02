@@ -26,8 +26,8 @@ def run_browser(variables):
         from selenium.webdriver.firefox.options import Options
         cap = DesiredCapabilities().FIREFOX
         cap["marionette"] = True
-        cap['headless'] = False
         options_ff = Options()
+        options_ff.headless('False')
         options_ff.binary_location = 'C:\\Users\\droma\\Downloads\\firefox\\firefox.exe'
         driver = webdriver.Firefox(capabilities=cap, executable_path="C:\\Users\\droma\\Documents\\geckodriver\\geckodriver.exe", firefox_options=options_ff)
 
