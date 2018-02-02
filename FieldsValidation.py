@@ -7,7 +7,8 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from PageObject.GoogleForm import GoogleForm
 from Resources.resources import __google_form_url
-
+import logging
+logging.basicConfig(filename="log.txt", level=logging.INFO)
 
 @pytest.fixture(scope='module')
 def run_browser(variables):

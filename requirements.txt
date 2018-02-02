@@ -1,3 +1,4 @@
 selenium==3.8.1
 pytest==3.3.2
 pytest-variables==1.7.1
+pytest-html==1.16.1
