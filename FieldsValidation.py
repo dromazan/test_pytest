@@ -1,51 +1,8 @@
 import pytest
-from selenium import webdriver
-import sys
 import time
-import pytest_variables
-from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-from PageObject.GoogleForm import GoogleForm
-from Resources.resources import __google_form_url
 import logging
 logging.basicConfig(filename="log.txt", level=logging.INFO)
-
-@pytest.fixture(scope='module')
-def run_browser(variables):
-    browser = variables['capabilities']['browser']
-    print(browser)
-    if browser == 'Chrome':
-        print('using chrome driver')
-        from selenium.webdriver.chrome.options import Options
-        options_chrome = Options()
-        options_chrome.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
-        driver = webdriver.Chrome(chrome_options=options_chrome)
-
-    elif browser == 'Firefox':
-        print('using firefox driver')
-        from selenium.webdriver.firefox.options import Options
-        cap = DesiredCapabilities().FIREFOX
-        cap["marionette"] = True
-        options_ff = Options()
-        options_ff.binary_location = 'C:\\Users\\droma\\Downloads\\firefox\\firefox.exe'
-        driver = webdriver.Firefox(capabilities=cap, executable_path="C:\\Users\\droma\\Documents\\geckodriver\\geckodriver.exe", firefox_options=options_ff)
-
-    elif browser == 'Edge':
-        print('using edge driver')
-        from selenium.webdriver.edge.options import Options
-        driver = webdriver.Edge(executable_path="Z:\\edgedriver\\MicrosoftWebDriver.exe")
-
-    # Default browser is Chrome
-    else:
-        from selenium.webdriver.chrome.options import Options
-        options = Options()
-        options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
-        driver = webdriver.Chrome(chrome_options=options)
-
-    google = GoogleForm(driver)
-    google.driver.get(__google_form_url)
-    yield google
-    driver.close()
 
 
 @pytest.mark.parametrize('email', ['test@gmail.com', 'quitealongnameofemail@yahoo.com', 'gmail@qc.eu'])
@@ -56,6 +13,7 @@ def test_email_field_positive(run_browser, email):
 
 
 email_data_negative = ['test@gmail', '@gmail', 'gmail.com', '@com.com', '', 'w@test.c']
+
 
 @pytest.mark.parametrize('email', email_data_negative)
 def test_email_field_negative(run_browser, email):
@@ -97,13 +55,16 @@ def test_empty_born_date(run_browser):
 
 _name_pos = ['Hellomynameisdenys J', 'R_1', 'E. Harry', '!@#$%^&*()_']
 
+
 @pytest.mark.parametrize('name', _name_pos)
 def test_name_field_positive(run_browser, name):
     run_browser.clear_name_field()
     run_browser.fill_name_field(name)
     assert run_browser.name_exception_field().is_displayed() is False, 'Field\'s boundary values are incorrect'
 
+
 _name_neg = ['Hellomynameisdenys Jr']
+
 
 @pytest.mark.parametrize('name', _name_neg)
 def test_name_field_above_limit(run_browser, name):
@@ -116,6 +77,7 @@ def test_name_field_empty(run_browser):
     run_browser.clear_name_field()
     run_browser.fill_name_field(' ')
     assert run_browser.name_exception_field().text == u'Відповідь на це запитання обов’язкова'
+
 
 @pytest.mark.skip(reason="sex deleted")
 @pytest.mark.parametrize('option', ['Мужской', 'Женский', 'Другой'])
