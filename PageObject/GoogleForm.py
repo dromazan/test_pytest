@@ -23,34 +23,36 @@ class GoogleForm(BasePage):
         return self.driver.find_element(By.XPATH, '//input[@type="date"]')
 
     def day_field(self):
-        return self.driver.find_element(By.XPATH, '//input[@aria-label = "День місяця"]')
+        # return self.driver.find_element(By.XPATH, '//input[@name="entry.200710398_day"]')
+        return self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div/div[2]/div[2]/div[2]/div[2]/div/input[3]')
 
     def month_field(self):
-        return self.driver.find_element(By.XPATH, '//input[@aria-label = "Місяць"]')
+        # return self.driver.find_element(By.XPATH, '//input[@name = "entry.200710398_month"]')
+        return self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div/div[2]/div[2]/div[2]/div[2]/div/input[2]')
 
     def year_field(self):
-        return self.driver.find_element(By.XPATH, '//input[@aria-label = "Рік"]')
+        # return self.driver.find_element(By.XPATH, '//input[@name="entry.200710398_year"]')
+        return self.driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div/div[2]/div[2]/div[2]/div[2]/div/input[1]')
 
     def empty_date_field(self):
-        self.driver.find_element(By.XPATH, '//input[@aria-label = "День місяця"]').clear()
-        self.driver.find_element(By.XPATH, '//input[@aria-label = "Місяць"]').clear()
-        self.driver.find_element(By.XPATH,'//input[@aria-label = "Рік"]').clear()
+        self.day_field().clear()
+        self.month_field().clear()
+        self.year_field().clear()
 
     def date_exception_field(self):
-        return self.driver.find_element(By.XPATH, '//*[@id="i.err.1236342938"]')
+        return self.driver.find_element(By.ID, "i.err.1236342938")
 
     def name_field(self):
-        return self.driver.find_element(By.XPATH, '//input[@aria-label = "Имя"]')
+        return self.driver.find_element(By.XPATH, '//input[@aria-label = "Name"]')
 
     def name_exception_field(self):
         return self.driver.find_element(By.ID, 'i.err.1645109785')
 
     def clear_name_field(self):
-        self.driver.find_element(By.XPATH, '//input[@aria-label = "Имя"]').clear()
+        self.name_field().clear()
 
     def fill_name_field(self, value):
-        elem = self.driver.find_element(By.XPATH, '//input[@aria-label = "Имя"]')
-        elem.send_keys(value)
+        self.name_field().send_keys(value)
 
     def sex_listbox(self):
         return self.driver.find_element(By.XPATH, '//div[contains(@class, "quantumWizMenuPaperselectOptionList)]')

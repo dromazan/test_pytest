@@ -1,7 +1,6 @@
 import pytest
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-
 from PageObject.GoogleForm import GoogleForm
 from Resources.resources import *
 
@@ -22,7 +21,7 @@ def run_browser(browser):
         cap = DesiredCapabilities().FIREFOX
         cap["marionette"] = True
         options_ff = Options()
-        options_ff.binary_location = ff_binary_path
+        #options_ff.binary_location = ff_binary_path
         driver = webdriver.Firefox(capabilities=cap, executable_path=gecko_path, firefox_options=options_ff)
 
     elif browser == 'Edge':
@@ -35,7 +34,7 @@ def run_browser(browser):
         from selenium.webdriver.chrome.options import Options
         options = Options()
         options.add_experimental_option('prefs', {'intl.accept_languages': 'en,en_US'})
-        driver = webdriver.Chrome(chrome_options=options)
+        driver = webdriver.Chrome(chrome_options=options, executable_path=chdriver_path)
 
     google = GoogleForm(driver)
     google.driver.get(google_form_url)
